@@ -48,10 +48,10 @@ export default function Projects() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.1] max-w-3xl"
+            className="hero-heading text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] max-w-3xl"
           >
             Homes we've<br />
-            brought to <span className="italic font-normal">life</span>
+            brought to <span className="italic">life</span>
           </motion.h1>
         </motion.div>
       </section>

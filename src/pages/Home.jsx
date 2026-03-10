@@ -20,21 +20,23 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section ref={heroRef} className="relative h-screen min-h-[600px] max-h-[1000px] overflow-hidden">
+      <section ref={heroRef} className="relative h-screen min-h-150 max-h-250 overflow-hidden">
         {/* Background */}
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80"
             alt="Custom home by Welcome Homes WA"
             className="w-full h-full object-cover"
+            loading="eager"
+            fetchPriority="high"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/60" />
         </motion.div>
 
         {/* Hero Content */}
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-[1400px] mx-auto"
+          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-350 mx-auto"
         >
           <div className="max-w-3xl">
             <motion.p
@@ -50,10 +52,10 @@ export default function Home() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-light text-white tracking-tight leading-[1.1] mb-6 sm:mb-8"
+              className="hero-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.1] mb-6 sm:mb-8"
             >
               Home that<br />
-              <span className="font-normal italic">welcomes</span> you<br />
+              <span className="italic">welcomes</span> you<br />
               everytime
             </motion.h1>
 
@@ -100,12 +102,12 @@ export default function Home() {
       </section>
 
       {/* ===== STATS STRIP ===== */}
-      <section className="bg-white border-b border-charcoal-100">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-10 sm:py-14">
+      <section className="section-slide bg-white border-b border-charcoal-100">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12 py-10 sm:py-14">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
             {stats.map((stat, i) => (
               <RevealOnScroll key={i} delay={i * 0.1}>
-                <div className="text-center lg:text-left">
+                <div className="text-center">
                   <p className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900 mb-1">
                     {stat.number}
                   </p>
@@ -120,8 +122,8 @@ export default function Home() {
       </section>
 
       {/* ===== WHAT WE BUILD ===== */}
-      <section className="section-padding bg-warm-50">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <section className="section-slide section-padding bg-warm-50">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <div>
               <SectionLabel>What We Build</SectionLabel>
@@ -160,6 +162,7 @@ export default function Home() {
                 alt="Modern home exterior"
                 className="rounded-2xl mt-8 sm:mt-12"
                 aspectRatio="aspect-[3/4]"
+                loading="eager"
               />
             </div>
           </div>
@@ -167,15 +170,17 @@ export default function Home() {
       </section>
 
       {/* ===== WHY CHOOSE US ===== */}
-      <section className="section-padding bg-white">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-2xl mb-12 sm:mb-16">
+      <section className="section-slide section-padding bg-white">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="text-center mb-12 sm:mb-16">
             <SectionLabel>Why Choose Us</SectionLabel>
-            <TextReveal
-              text="Building with care, delivering with pride"
-              className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900 leading-tight"
-              tag="h2"
-            />
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900 leading-tight whitespace-nowrap">
+              <TextReveal
+                text="Building with care, delivering with pride"
+                className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900 leading-tight"
+                tag="span"
+              />
+            </h2>
           </div>
 
           <StaggerContainer className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6" staggerDelay={0.1}>
@@ -202,8 +207,8 @@ export default function Home() {
       </section>
 
       {/* ===== FEATURED PROJECTS ===== */}
-      <section className="section-padding bg-warm-50">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <section className="section-slide section-padding bg-warm-50">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16">
             <div>
               <SectionLabel>Featured Projects</SectionLabel>
@@ -233,7 +238,7 @@ export default function Home() {
                       src={project.hero}
                       alt={project.name}
                       loading="lazy"
-                      className="w-full aspect-[4/3] object-cover"
+                      className="w-full aspect-4/3 object-cover"
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     />
@@ -259,7 +264,7 @@ export default function Home() {
       </section>
 
       {/* ===== FULL WIDTH IMAGE BREAK ===== */}
-      <section className="relative h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
+      <section className="section-slide relative h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
         <ParallaxImage
           src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&q=80"
           alt="Custom home design"
@@ -278,8 +283,8 @@ export default function Home() {
       </section>
 
       {/* ===== TESTIMONIALS ===== */}
-      <section className="section-padding bg-white">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+      <section className="section-slide section-padding bg-white">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="max-w-2xl mb-12 sm:mb-16">
             <SectionLabel>Testimonials</SectionLabel>
             <TextReveal
@@ -298,7 +303,7 @@ export default function Home() {
                       <Star key={j} size={14} className="fill-warm-500 text-warm-500" />
                     ))}
                   </div>
-                  <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed flex-grow mb-6">
+                  <p className="text-charcoal-600 text-sm sm:text-base leading-relaxed grow mb-6">
                     "{item.quote}"
                   </p>
                   <AnimatedLine className="mb-5" />
@@ -327,49 +332,6 @@ export default function Home() {
               </Link>
             </div>
           </RevealOnScroll>
-        </div>
-      </section>
-
-      {/* ===== CTA SECTION ===== */}
-      <section className="bg-charcoal-900 section-padding">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <RevealOnScroll>
-                <p className="text-warm-500 text-xs sm:text-sm tracking-[0.2em] uppercase mb-4 sm:mb-6">
-                  Start Your Journey
-                </p>
-              </RevealOnScroll>
-              <TextReveal
-                text="Ready to build your dream home?"
-                className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-tight mb-6"
-                tag="h2"
-              />
-              <RevealOnScroll delay={0.2}>
-                <p className="text-white/50 text-base sm:text-lg leading-relaxed mb-8 max-w-lg">
-                  Every great home starts with a conversation. Tell us about your vision
-                  and let's explore how we can bring it to life.
-                </p>
-              </RevealOnScroll>
-              <RevealOnScroll delay={0.3}>
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-3 bg-white text-charcoal-900 px-8 py-4 rounded-full text-sm tracking-wide hover:bg-warm-100 transition-colors group"
-                >
-                  Get In Touch
-                  <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                </Link>
-              </RevealOnScroll>
-            </div>
-            <RevealOnScroll direction="right">
-              <ImageReveal
-                src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=800&q=80"
-                alt="Welcome Homes WA"
-                className="rounded-2xl"
-                aspectRatio="aspect-[4/3]"
-              />
-            </RevealOnScroll>
-          </div>
         </div>
       </section>
     </>

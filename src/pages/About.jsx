@@ -18,19 +18,19 @@ export default function About() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[70vh] sm:h-[75vh] min-h-[500px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[70vh] sm:h-[75vh] min-h-125 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=1920&q=80"
             alt="Our Story"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/60" />
         </motion.div>
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-[1400px] mx-auto"
+          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-350 mx-auto"
         >
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -44,17 +44,17 @@ export default function About() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.1] max-w-3xl"
+            className="hero-heading text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] max-w-3xl"
           >
             Built on trust,<br />
-            driven by <span className="italic font-normal">passion</span>
+            driven by <span className="italic">passion</span>
           </motion.h1>
         </motion.div>
       </section>
 
       {/* ===== FOUNDER STORY ===== */}
       <section className="section-padding bg-white">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20">
             <div>
               <SectionLabel>Who We Are</SectionLabel>
@@ -102,7 +102,7 @@ export default function About() {
 
       {/* ===== STATS ===== */}
       <section className="bg-charcoal-900 py-14 sm:py-20">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-4">
             {stats.map((stat, i) => (
               <RevealOnScroll key={i} delay={i * 0.1}>
@@ -121,9 +121,9 @@ export default function About() {
       </section>
 
       {/* ===== PHILOSOPHY ===== */}
-      <section className="section-padding bg-warm-50">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="max-w-2xl mb-12 sm:mb-16">
+      <section className="section-slide section-padding bg-warm-50">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="text-center mb-12 sm:mb-16">
             <SectionLabel>Our Philosophy</SectionLabel>
             <TextReveal
               text="The principles that guide every build"
@@ -157,7 +157,7 @@ export default function About() {
 
       {/* ===== WHY CUSTOM BUILDS ===== */}
       <section className="section-padding bg-white">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
             <RevealOnScroll direction="left">
               <div className="relative">
@@ -216,7 +216,7 @@ export default function About() {
 
       {/* ===== VIDEO SECTION ===== */}
       <section className="section-padding bg-warm-50">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
             <SectionLabel>Watch Our Story</SectionLabel>
             <TextReveal

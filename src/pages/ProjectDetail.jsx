@@ -65,7 +65,7 @@ export default function ProjectDetail() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.1] mb-4"
+            className="hero-heading text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] mb-4"
           >
             {project.name}
           </motion.h1>
@@ -177,7 +177,7 @@ export default function ProjectDetail() {
                   </ul>
 
                   <Link
-                    to="/contact"
+                    to="/contact#form"
                     className="w-full inline-flex items-center justify-center gap-2 bg-charcoal-900 text-white px-6 py-3.5 rounded-full text-sm tracking-wide hover:bg-charcoal-800 transition-colors mt-8 group"
                   >
                     Build Something Similar

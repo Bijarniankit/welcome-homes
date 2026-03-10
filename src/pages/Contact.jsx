@@ -73,19 +73,19 @@ export default function Contact() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[65vh] sm:h-[70vh] min-h-[450px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[65vh] sm:h-[70vh] min-h-112.5 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&q=80"
             alt="Start Your Build"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/60" />
         </motion.div>
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-[1400px] mx-auto"
+          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-350 mx-auto"
         >
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -99,18 +99,18 @@ export default function Contact() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-            className="text-4xl sm:text-5xl lg:text-6xl font-light text-white tracking-tight leading-[1.1] max-w-3xl"
+            className="hero-heading text-4xl sm:text-5xl lg:text-6xl text-white leading-[1.1] max-w-3xl"
           >
             Let's build your<br />
-            <span className="italic font-normal">dream</span> home
+            <span className="italic">dream</span> home
           </motion.h1>
         </motion.div>
       </section>
 
       {/* ===== FORM SECTION ===== */}
-      <section className="section-padding bg-warm-50">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="grid lg:grid-cols-5 gap-12 lg:gap-16">
+      <section id="form" className="section-padding bg-warm-50">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="grid lg:grid-cols-5 gap-8 lg:gap-12">
             {/* Form */}
             <div className="lg:col-span-3">
               <SectionLabel>Start Your Journey</SectionLabel>
@@ -301,7 +301,7 @@ export default function Contact() {
 
             {/* Sidebar Info */}
             <div className="lg:col-span-2">
-              <div className="lg:sticky lg:top-28 space-y-8">
+              <div className="lg:sticky lg:top-28 space-y-5">
                 <RevealOnScroll direction="right">
                   <div className="bg-white rounded-2xl p-6 sm:p-8">
                     <h3 className="text-lg font-normal text-charcoal-900 tracking-tight mb-6">
@@ -315,7 +315,7 @@ export default function Contact() {
                         { icon: Clock, label: "Hours", value: "Mon - Fri, 8am - 5pm" },
                       ].map(({ icon: Icon, label, value, href }, i) => (
                         <div key={i} className="flex items-start gap-4">
-                          <div className="w-10 h-10 rounded-full bg-warm-100 flex items-center justify-center flex-shrink-0">
+                          <div className="w-10 h-10 rounded-full bg-warm-100 flex items-center justify-center shrink-0">
                             <Icon size={16} className="text-warm-600" />
                           </div>
                           <div>
@@ -359,17 +359,31 @@ export default function Contact() {
         </div>
       </section>
 
-      {/* ===== MAP PLACEHOLDER ===== */}
+      {/* ===== MAP SECTION ===== */}
       <section className="bg-white">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
           <RevealOnScroll>
-            <div className="rounded-2xl overflow-hidden bg-warm-100 h-[300px] sm:h-[400px] flex items-center justify-center">
-              <div className="text-center">
-                <MapPin size={32} className="text-warm-400 mx-auto mb-3" />
-                <p className="text-charcoal-500 text-lg font-light">Perth, Western Australia</p>
-                <p className="text-charcoal-400 text-sm mt-1">Serving all of the Perth metropolitan area</p>
+            <a
+              href="https://www.google.com/maps/search/Welcome+Homes+WA+Perth+Western+Australia"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="block rounded-2xl overflow-hidden group relative"
+            >
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d216251.94697368765!2d115.72370169453124!3d-31.952889!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2a32966cdb47733d%3A0x304f0b535df55d0!2sPerth%20WA%2C%20Australia!5e0!3m2!1sen!2sus!4v1700000000000!5m2!1sen!2sus"
+                className="w-full h-75 sm:h-100 border-0 pointer-events-none"
+                allowFullScreen=""
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Welcome Homes WA Location - Perth, Western Australia"
+              />
+              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors flex items-center justify-center">
+                <div className="opacity-0 group-hover:opacity-100 transition-opacity bg-white px-5 py-3 rounded-full flex items-center gap-2 shadow-lg">
+                  <MapPin size={16} className="text-charcoal-900" />
+                  <span className="text-sm font-medium text-charcoal-900">Open in Maps</span>
+                </div>
               </div>
-            </div>
+            </a>
           </RevealOnScroll>
         </div>
       </section>

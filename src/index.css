@@ -50,6 +50,7 @@
   /* --- Fonts --- */
   --font-heading: 'Inter', system-ui, -apple-system, sans-serif;
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-hero: 'Playfair Display', Georgia, serif;
 }
 
 /* ============================================
@@ -127,6 +128,36 @@ h1, h2, h3, h4, h5, h6 {
 img {
   opacity: 1;
   transition: opacity 0.4s ease;
+}
+
+/* Sliding section overlap effect */
+.section-slide {
+  position: relative;
+  z-index: 1;
+}
+
+.section-slide + .section-slide {
+  margin-top: -2rem;
+  border-radius: 1.5rem 1.5rem 0 0;
+  box-shadow: 0 -10px 40px rgba(0,0,0,0.06);
+  position: relative;
+  z-index: 2;
+}
+
+.section-slide:nth-child(3) { z-index: 3; }
+.section-slide:nth-child(4) { z-index: 4; }
+.section-slide:nth-child(5) { z-index: 5; }
+.section-slide:nth-child(6) { z-index: 6; }
+.section-slide:nth-child(7) { z-index: 7; }
+.section-slide:nth-child(8) { z-index: 8; }
+.section-slide:nth-child(9) { z-index: 9; }
+.section-slide:nth-child(10) { z-index: 10; }
+
+/* Hero font style */
+.hero-heading {
+  font-family: var(--font-hero);
+  font-weight: 400;
+  letter-spacing: -0.02em;
 }
 
 /* Custom scrollbar */

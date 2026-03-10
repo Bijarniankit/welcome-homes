@@ -95,7 +95,7 @@ export function TextReveal({ text, className = '', tag = 'h2' }) {
 }
 
 /* Image with reveal effect */
-export function ImageReveal({ src, alt, className = '', aspectRatio = 'aspect-[4/3]' }) {
+export function ImageReveal({ src, alt, className = '', aspectRatio = 'aspect-[4/3]', loading = 'lazy' }) {
   return (
     <motion.div
       initial={{ opacity: 0, scale: 1.1 }}
@@ -104,13 +104,11 @@ export function ImageReveal({ src, alt, className = '', aspectRatio = 'aspect-[4
       transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
       className={`overflow-hidden ${aspectRatio} ${className}`}
     >
-      <motion.img
+      <img
         src={src}
         alt={alt}
-        loading="lazy"
-        className="w-full h-full object-cover"
-        whileHover={{ scale: 1.05 }}
-        transition={{ duration: 0.6, ease: "easeOut" }}
+        loading={loading}
+        className="w-full h-full object-cover transition-transform duration-600 hover:scale-105"
       />
     </motion.div>
   );

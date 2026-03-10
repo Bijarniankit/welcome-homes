@@ -40,7 +40,7 @@ export default function Navbar() {
             : 'bg-transparent'
         }`}
       >
-        <nav className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <nav className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="flex items-center justify-between h-16 sm:h-18 lg:h-20">
             {/* Logo */}
             <Link to="/" className="relative z-10 group">

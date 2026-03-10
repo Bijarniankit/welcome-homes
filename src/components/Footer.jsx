@@ -1,64 +1,93 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Instagram, Facebook, Linkedin, Youtube } from 'lucide-react';
+import { ArrowUpRight, Instagram, Facebook, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
 import { siteConfig, navLinks } from '../data/siteData';
 import { useFadeIn } from '../hooks/useAnimations';
 
-export default function Footer() {
+/* Separate CTA Section */
+export function CTASection() {
   const { ref, isInView } = useFadeIn();
 
   return (
-    <footer ref={ref} className="bg-charcoal-900 text-white">
-      {/* CTA Band */}
-      <div className="border-b border-white/10">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-16 sm:py-20 lg:py-28">
+    <section ref={ref} className="relative overflow-hidden">
+      <div className="bg-charcoal-900 py-20 sm:py-28 lg:py-32">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={isInView ? { opacity: 1, y: 0 } : {}}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            className="max-w-3xl"
           >
             <p className="text-warm-400 text-sm tracking-widest uppercase mb-4">
               Ready to start?
             </p>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-white leading-tight mb-8">
+            <h2 className="hero-heading text-3xl sm:text-4xl lg:text-5xl xl:text-6xl tracking-tight text-white leading-tight mb-6 max-w-3xl mx-auto">
               Let's build the home<br />you've been dreaming of.
             </h2>
-            <Link
-              to="/contact"
-              className="inline-flex items-center gap-3 group"
-            >
-              <span className="text-lg text-white/80 group-hover:text-white transition-colors">
+            <p className="text-white/40 text-base sm:text-lg leading-relaxed mb-10 max-w-xl mx-auto">
+              Start with a conversation. Tell us your vision and let's explore what's possible.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                to="/contact#form"
+                className="inline-flex items-center gap-3 bg-white text-charcoal-900 px-8 py-4 rounded-full text-sm tracking-wide hover:bg-warm-100 transition-colors group"
+              >
                 Start your journey
-              </span>
-              <span className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center group-hover:bg-white group-hover:text-charcoal-900 transition-all">
-                <ArrowUpRight size={16} />
-              </span>
-            </Link>
+                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+              </Link>
+              <Link
+                to="/projects"
+                className="inline-flex items-center gap-3 border border-white/20 text-white px-8 py-4 rounded-full text-sm tracking-wide hover:bg-white/10 transition-colors"
+              >
+                View Our Work
+              </Link>
+            </div>
           </motion.div>
         </div>
       </div>
+    </section>
+  );
+}
 
-      {/* Footer Content */}
-      <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-16">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8">
+export default function Footer() {
+  return (
+    <footer className="bg-charcoal-900 text-white border-t border-white/5">
+      <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-16">
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-8">
           {/* Brand */}
-          <div className="sm:col-span-2 lg:col-span-1">
+          <div className="md:col-span-4">
             <Link to="/" className="inline-block mb-4">
               <span className="text-xl font-light tracking-tight">
                 Welcome <span className="font-normal">Homes</span>
                 <span className="text-warm-500 ml-1 text-sm opacity-60">WA</span>
               </span>
             </Link>
-            <p className="text-white/40 text-sm leading-relaxed max-w-xs">
+            <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-6">
               Custom homes designed around the lifestyle of the owner. Building quality homes across Perth, Western Australia.
             </p>
+            {/* Social */}
+            <div className="flex gap-3">
+              {[
+                { icon: Instagram, href: siteConfig.social.instagram, label: "Instagram" },
+                { icon: Facebook, href: siteConfig.social.facebook, label: "Facebook" },
+                { icon: Linkedin, href: siteConfig.social.linkedin, label: "LinkedIn" },
+                { icon: Youtube, href: siteConfig.social.youtube, label: "YouTube" },
+              ].map(({ icon: Icon, href, label }) => (
+                <a
+                  key={label}
+                  href={href}
+                  aria-label={label}
+                  className="w-9 h-9 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all"
+                >
+                  <Icon size={15} />
+                </a>
+              ))}
+            </div>
           </div>
 
           {/* Quick Links */}
-          <div>
+          <div className="md:col-span-2">
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-5">Navigate</h4>
-            <ul className="space-y-3">
+            <ul className="space-y-2.5">
               {navLinks.map((link) => (
                 <li key={link.path}>
                   <Link
@@ -73,43 +102,45 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div>
+          <div className="md:col-span-3">
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-5">Contact</h4>
-            <ul className="space-y-3 text-sm text-white/50">
-              <li>
-                <a href={`tel:${siteConfig.phone}`} className="hover:text-white transition-colors">
+            <ul className="space-y-3 text-sm">
+              <li className="flex items-center gap-3">
+                <Phone size={14} className="text-white/30 shrink-0" />
+                <a href={`tel:${siteConfig.phone}`} className="text-white/50 hover:text-white transition-colors">
                   {siteConfig.phone}
                 </a>
               </li>
-              <li>
-                <a href={`mailto:${siteConfig.email}`} className="hover:text-white transition-colors">
+              <li className="flex items-center gap-3">
+                <Mail size={14} className="text-white/30 shrink-0" />
+                <a href={`mailto:${siteConfig.email}`} className="text-white/50 hover:text-white transition-colors">
                   {siteConfig.email}
                 </a>
               </li>
-              <li>{siteConfig.address}</li>
+              <li className="flex items-start gap-3">
+                <MapPin size={14} className="text-white/30 shrink-0 mt-0.5" />
+                <span className="text-white/50">{siteConfig.address}</span>
+              </li>
             </ul>
           </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="text-xs uppercase tracking-widest text-white/30 mb-5">Follow</h4>
-            <div className="flex gap-3">
-              {[
-                { icon: Instagram, href: siteConfig.social.instagram, label: "Instagram" },
-                { icon: Facebook, href: siteConfig.social.facebook, label: "Facebook" },
-                { icon: Linkedin, href: siteConfig.social.linkedin, label: "LinkedIn" },
-                { icon: Youtube, href: siteConfig.social.youtube, label: "YouTube" },
-              ].map(({ icon: Icon, href, label }) => (
-                <a
-                  key={label}
-                  href={href}
-                  aria-label={label}
-                  className="w-10 h-10 rounded-full border border-white/10 flex items-center justify-center text-white/40 hover:text-white hover:border-white/30 transition-all"
-                >
-                  <Icon size={16} />
-                </a>
-              ))}
-            </div>
+          {/* Hours */}
+          <div className="md:col-span-3">
+            <h4 className="text-xs uppercase tracking-widest text-white/30 mb-5">Hours</h4>
+            <ul className="space-y-2 text-sm text-white/50">
+              <li className="flex justify-between">
+                <span>Mon - Fri</span>
+                <span className="text-white/70">8am - 5pm</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Saturday</span>
+                <span className="text-white/70">By appointment</span>
+              </li>
+              <li className="flex justify-between">
+                <span>Sunday</span>
+                <span className="text-white/70">Closed</span>
+              </li>
+            </ul>
           </div>
         </div>
 
