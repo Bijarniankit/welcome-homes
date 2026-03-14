@@ -15,7 +15,9 @@ export default function Contact() {
     message: '',
   });
   const [submitted, setSubmitted] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [errors, setErrors] = useState({});
+  const [apiError, setApiError] = useState('');
 
   const heroRef = useRef(null);
   const { scrollYProgress } = useScroll({
@@ -40,14 +42,39 @@ export default function Contact() {
     return newErrors;
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setApiError('');
+
     const newErrors = validate();
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
       return;
     }
-    setSubmitted(true);
+
+    setIsLoading(true);
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to send enquiry');
+      }
+
+      setSubmitted(true);
+    } catch (error) {
+      setApiError(error.message || 'Something went wrong. Please try again.');
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   const inputClasses = (field) => `
@@ -284,15 +311,37 @@ export default function Contact() {
                       />
                     </div>
 
+                    {/* Error Message */}
+                    {apiError && (
+                      <div className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-xl text-sm">
+                        {apiError}
+                      </div>
+                    )}
+
                     {/* Submit */}
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.01 }}
-                      whileTap={{ scale: 0.99 }}
-                      className="w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-charcoal-900 text-white px-10 py-4 rounded-full text-sm tracking-wide hover:bg-charcoal-800 transition-colors"
+                      disabled={isLoading}
+                      whileHover={{ scale: isLoading ? 1 : 1.01 }}
+                      whileTap={{ scale: isLoading ? 1 : 0.99 }}
+                      className={`w-full sm:w-auto inline-flex items-center justify-center gap-3 bg-charcoal-900 text-white px-10 py-4 rounded-full text-sm tracking-wide transition-colors ${
+                        isLoading ? 'opacity-70 cursor-not-allowed' : 'hover:bg-charcoal-800'
+                      }`}
                     >
-                      <Send size={16} />
-                      Submit Enquiry
+                      {isLoading ? (
+                        <>
+                          <svg className="animate-spin h-4 w-4" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none" />
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                          </svg>
+                          Sending...
+                        </>
+                      ) : (
+                        <>
+                          <Send size={16} />
+                          Submit Enquiry
+                        </>
+                      )}
                     </motion.button>
                   </form>
                 </RevealOnScroll>
