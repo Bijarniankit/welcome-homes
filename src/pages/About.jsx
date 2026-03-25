@@ -18,7 +18,7 @@ export default function About() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[70vh] sm:h-[75vh] min-h-125 overflow-hidden">
+      <section ref={heroRef} className="relative h-[55vh] sm:h-[65vh] lg:h-[75vh] min-h-[350px] sm:min-h-125 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600585153490-76fb20a32601?w=1920&q=80"
@@ -36,7 +36,7 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-white/60 text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
+            className="text-white text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
           >
             Our Story
           </motion.p>
@@ -76,7 +76,7 @@ export default function About() {
 
             <div className="space-y-4 sm:space-y-6">
               <ImageReveal
-                src="https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=800&q=80"
+                src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=800&q=80"
                 alt="Welcome Homes WA team"
                 className="rounded-2xl"
                 aspectRatio="aspect-[4/3]"
@@ -137,8 +137,8 @@ export default function About() {
               const Icon = philosophyIcons[i];
               return (
                 <StaggerItem key={i}>
-                  <div className="bg-white rounded-2xl p-6 sm:p-8 h-full group hover:shadow-lg transition-shadow duration-500">
-                    <div className="w-12 h-12 rounded-full bg-warm-100 flex items-center justify-center mb-6 group-hover:bg-warm-200 transition-colors">
+                  <div className="bg-white rounded-2xl p-6 sm:p-8 h-full group hover:shadow-lg transition-shadow duration-500 text-center">
+                    <div className="w-12 h-12 rounded-full bg-warm-100 flex items-center justify-center mb-6 group-hover:bg-warm-200 transition-colors mx-auto">
                       <Icon size={20} className="text-warm-600" />
                     </div>
                     <h3 className="text-lg font-normal text-charcoal-900 tracking-tight mb-3">
@@ -229,10 +229,11 @@ export default function About() {
           <RevealOnScroll>
             <div className="relative aspect-video rounded-2xl overflow-hidden bg-charcoal-100 max-w-4xl mx-auto">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
                 title="Welcome Homes WA"
                 className="absolute inset-0 w-full h-full"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                loading="lazy"
                 allowFullScreen
               />
             </div>

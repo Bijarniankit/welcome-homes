@@ -86,7 +86,7 @@ export default function Services() {
 
           <div className="relative">
             {/* Connecting line */}
-            <div className="hidden lg:block absolute top-12 left-[10%] right-[10%] h-px bg-white/10" />
+            <div className="hidden lg:block absolute top-7 left-[10%] right-[10%] h-px bg-white/10" />
             
             <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-6">
               {services.customHomes.process.map((step, i) => (
@@ -183,7 +183,7 @@ function ServiceHero() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-[70vh] sm:h-[75vh] min-h-125 overflow-hidden">
+    <section ref={ref} className="relative h-[55vh] sm:h-[65vh] lg:h-[75vh] min-h-[350px] sm:min-h-125 overflow-hidden">
       <motion.div style={{ y: heroY }} className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1920&q=80"
@@ -201,7 +201,7 @@ function ServiceHero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3, duration: 0.8 }}
-          className="text-white/60 text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
+          className="text-white text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
         >
           Our Services
         </motion.p>

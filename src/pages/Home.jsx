@@ -20,7 +20,7 @@ export default function Home() {
   return (
     <>
       {/* ===== HERO SECTION ===== */}
-      <section ref={heroRef} className="relative h-screen min-h-150 max-h-250 overflow-hidden">
+      <section ref={heroRef} className="relative h-screen min-h-[75vh] sm:min-h-150 max-h-250 overflow-hidden">
         {/* Background */}
         <motion.div style={{ scale: heroScale }} className="absolute inset-0">
           <img
@@ -63,20 +63,21 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.8 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-row flex-wrap gap-3 sm:gap-4"
             >
               <Link
                 to="/projects"
-                className="inline-flex items-center gap-3 bg-white text-charcoal-900 px-6 sm:px-8 py-3.5 rounded-full text-sm tracking-wide hover:bg-warm-100 transition-colors group"
+                className="inline-flex items-center justify-center gap-2 bg-white text-charcoal-900 px-5 sm:px-8 py-3 sm:py-3.5 rounded-full text-sm tracking-wide hover:bg-warm-100 transition-colors group"
               >
                 View Our Work
                 <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
               <Link
                 to="/contact"
-                className="inline-flex items-center gap-3 border border-white/30 text-white px-6 sm:px-8 py-3.5 rounded-full text-sm tracking-wide hover:bg-white/10 transition-colors"
+                className="inline-flex items-center justify-center gap-2 bg-white text-charcoal-900 px-5 sm:px-8 py-3 sm:py-3.5 rounded-full text-sm tracking-wide hover:bg-warm-100 transition-colors group"
               >
                 Start Your Build
+                <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
             </motion.div>
           </div>
@@ -174,7 +175,7 @@ export default function Home() {
         <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="text-center mb-12 sm:mb-16">
             <SectionLabel>Why Choose Us</SectionLabel>
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900 leading-tight whitespace-nowrap">
+            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900 leading-tight">
               <TextReveal
                 text="Building with care, delivering with pride"
                 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900 leading-tight"
@@ -188,8 +189,8 @@ export default function Home() {
               const Icon = iconMap[item.icon];
               return (
                 <StaggerItem key={i}>
-                  <div className="group">
-                    <div className="w-12 h-12 rounded-full bg-warm-100 flex items-center justify-center mb-5 group-hover:bg-warm-200 transition-colors">
+                  <div className="group text-center">
+                    <div className="w-12 h-12 rounded-full bg-warm-100 flex items-center justify-center mb-5 group-hover:bg-warm-200 transition-colors mx-auto">
                       <Icon size={20} className="text-warm-600" />
                     </div>
                     <h3 className="text-lg font-normal text-charcoal-900 mb-3 tracking-tight">
@@ -213,7 +214,7 @@ export default function Home() {
             <div>
               <SectionLabel>Featured Projects</SectionLabel>
               <TextReveal
-                text="Recent custom builds"
+                text="Recent builds"
                 className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900"
                 tag="h2"
               />
@@ -264,15 +265,15 @@ export default function Home() {
       </section>
 
       {/* ===== FULL WIDTH IMAGE BREAK ===== */}
-      <section className="section-slide relative h-[50vh] sm:h-[60vh] lg:h-[70vh] overflow-hidden">
+      <section className="section-slide relative h-[40vh] sm:h-[50vh] lg:h-[60vh] overflow-hidden">
         <ParallaxImage
           src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&q=80"
           alt="Custom home design"
         />
-        <div className="absolute inset-0 bg-black/30 flex items-center justify-center">
+        <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
           <RevealOnScroll>
             <div className="text-center px-5">
-              <p className="text-white/60 text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">Our Promise</p>
+              <p className="text-white text-xs sm:text-sm tracking-[0.2em] uppercase mb-4">Our Promise</p>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light text-white tracking-tight leading-tight max-w-2xl">
                 A home built for you,<br />
                 <span className="italic font-normal">not from a catalogue</span>

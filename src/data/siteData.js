@@ -89,7 +89,7 @@ export const projects = [
       "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1200&q=80",
       "https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1200&q=80",
     ],
-    hero: "https://images.unsplash.com/photo-1600607687644-aac4c3eac7f4?w=1600&q=80",
+    hero: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=1600&q=80",
   },
   {
     id: "riverside-haven",

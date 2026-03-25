@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
-import { ArrowUpRight, Instagram, Facebook, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import { ArrowUpRight, Instagram, Facebook, Linkedin, Youtube, MapPin, Phone, Mail, Heart } from 'lucide-react';
 import { siteConfig, navLinks } from '../data/siteData';
 import { useFadeIn } from '../hooks/useAnimations';
 
@@ -10,7 +10,7 @@ export function CTASection() {
 
   return (
     <section ref={ref} className="relative overflow-hidden">
-      <div className="bg-charcoal-900 py-20 sm:py-28 lg:py-32">
+      <div className="bg-charcoal-900 py-14 sm:py-18 lg:py-20">
         <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12 text-center">
           <motion.div
             initial={{ opacity: 0, y: 40 }}
@@ -51,19 +51,26 @@ export function CTASection() {
 export default function Footer() {
   return (
     <footer className="bg-charcoal-900 text-white border-t border-white/5">
-      <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12 py-14 sm:py-16">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 lg:gap-8">
+      <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12 py-12 sm:py-14">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8">
           {/* Brand */}
-          <div className="md:col-span-4">
-            <Link to="/" className="inline-block mb-4">
-              <span className="text-xl font-light tracking-tight">
+          <div className="sm:col-span-2 lg:col-span-4">
+            <Link to="/" className="inline-flex items-center gap-3 mb-4">
+              <img
+                src="/logo1.png"
+                alt="Welcome Homes WA"
+                className="h-14 w-auto"
+                style={{ filter: 'brightness(0) invert(1)' }}
+              />
+              <span className="text-lg font-light tracking-tight text-white">
                 Welcome <span className="font-normal">Homes</span>
-                <span className="text-warm-500 ml-1 text-sm opacity-60">WA</span>
+                <span className="text-warm-500 ml-1 text-xs opacity-60">WA</span>
               </span>
             </Link>
-            <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-6">
+            <p className="text-white/40 text-sm leading-relaxed max-w-xs mb-3">
               Custom homes designed around the lifestyle of the owner. Building quality homes across Perth, Western Australia.
             </p>
+            <p className="text-white/30 text-xs mb-6">ABN: {siteConfig.abn}</p>
             {/* Social */}
             <div className="flex gap-3">
               {[
@@ -85,7 +92,7 @@ export default function Footer() {
           </div>
 
           {/* Quick Links */}
-          <div className="md:col-span-2">
+          <div className="lg:col-span-2">
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-5">Navigate</h4>
             <ul className="space-y-2.5">
               {navLinks.map((link) => (
@@ -102,7 +109,7 @@ export default function Footer() {
           </div>
 
           {/* Contact */}
-          <div className="md:col-span-3">
+          <div className="lg:col-span-3">
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-5">Contact</h4>
             <ul className="space-y-3 text-sm">
               <li className="flex items-center gap-3">
@@ -125,7 +132,7 @@ export default function Footer() {
           </div>
 
           {/* Hours */}
-          <div className="md:col-span-3">
+          <div className="lg:col-span-3">
             <h4 className="text-xs uppercase tracking-widest text-white/30 mb-5">Hours</h4>
             <ul className="space-y-2 text-sm text-white/50">
               <li className="flex justify-between">
@@ -145,14 +152,13 @@ export default function Footer() {
         </div>
 
         {/* Bottom bar */}
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-4">
+        <div className="mt-10 pt-6 border-t border-white/5 flex flex-col sm:flex-row justify-between items-center gap-3">
           <p className="text-xs text-white/25">
             &copy; {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
           </p>
-          <div className="flex gap-6 text-xs text-white/25">
-            <a href="#" className="hover:text-white/50 transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white/50 transition-colors">Terms of Service</a>
-          </div>
+          <p className="flex items-center gap-1 text-xs text-white/25">
+            Made with <Heart size={12} className="text-red-400 fill-red-400" /> by AtWebStudios
+          </p>
         </div>
       </div>
     </footer>

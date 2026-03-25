@@ -39,7 +39,7 @@ export default function ProjectDetail() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[75vh] sm:h-[80vh] min-h-[550px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[55vh] sm:h-[70vh] lg:h-[80vh] min-h-[350px] sm:min-h-[550px] overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src={project.hero}
@@ -81,20 +81,16 @@ export default function ProjectDetail() {
               {project.location}
             </span>
             <span className="flex items-center gap-1.5">
-              <Calendar size={14} />
-              {project.year}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Maximize2 size={14} />
-              {project.sqm}m&sup2;
-            </span>
-            <span className="flex items-center gap-1.5">
               <BedDouble size={14} />
               {project.beds} Bedrooms
             </span>
             <span className="flex items-center gap-1.5">
               <Bath size={14} />
               {project.baths} Bathrooms
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Calendar size={14} />
+              {project.year}
             </span>
           </motion.div>
         </motion.div>
@@ -153,7 +149,6 @@ export default function ProjectDetail() {
                       { label: "Location", value: project.location },
                       { label: "Build Type", value: project.type },
                       { label: "Year Completed", value: project.year },
-                      { label: "Size", value: `${project.sqm}m²` },
                       { label: "Bedrooms", value: project.beds },
                       { label: "Bathrooms", value: project.baths },
                     ].map((item, i) => (

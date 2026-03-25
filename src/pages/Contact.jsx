@@ -100,7 +100,7 @@ export default function Contact() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[65vh] sm:h-[70vh] min-h-112.5 overflow-hidden">
+      <section ref={heroRef} className="relative h-[55vh] sm:h-[65vh] lg:h-[70vh] min-h-[350px] sm:min-h-112.5 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?w=1920&q=80"
@@ -118,7 +118,7 @@ export default function Contact() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-white/60 text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
+            className="text-white text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
           >
             Get Started
           </motion.p>
@@ -350,7 +350,7 @@ export default function Contact() {
 
             {/* Sidebar Info */}
             <div className="lg:col-span-2">
-              <div className="lg:sticky lg:top-28 space-y-5">
+              <div className="lg:sticky lg:top-28 space-y-3">
                 <RevealOnScroll direction="right">
                   <div className="bg-white rounded-2xl p-6 sm:p-8">
                     <h3 className="text-lg font-normal text-charcoal-900 tracking-tight mb-6">

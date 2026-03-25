@@ -16,7 +16,7 @@ export default function Testimonials() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[65vh] sm:h-[70vh] min-h-112.5 overflow-hidden">
+      <section ref={heroRef} className="relative h-[55vh] sm:h-[65vh] lg:h-[70vh] min-h-[350px] sm:min-h-112.5 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80"
@@ -34,7 +34,7 @@ export default function Testimonials() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3, duration: 0.8 }}
-            className="text-white/60 text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
+            className="text-white text-xs sm:text-sm tracking-[0.25em] uppercase mb-4"
           >
             Testimonials
           </motion.p>
