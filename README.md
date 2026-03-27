@@ -44,9 +44,6 @@
 ### Fonts
 - **Inter** - Variable weight, via Google Fonts
 
-## URLs
-- **Preview**: `http://localhost:3000`
-
 ## Data Architecture
 - All content managed in `src/data/siteData.js`
 - 6 sample projects with multiple images

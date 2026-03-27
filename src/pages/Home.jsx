@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { ArrowUpRight, ArrowRight, Palette, Hammer, Eye, CheckCircle, Star, ChevronRight } from 'lucide-react';
 import { RevealOnScroll, StaggerContainer, StaggerItem, SectionLabel, TextReveal, ImageReveal, AnimatedLine } from '../components/AnimatedElements';
-import { stats, whyChooseUs, projects, testimonials, siteConfig } from '../data/siteData';
+import { stats, whyChooseUs, projects, testimonials } from '../data/siteData';
 
 const iconMap = { Palette, Hammer, Eye, CheckCircle };
 

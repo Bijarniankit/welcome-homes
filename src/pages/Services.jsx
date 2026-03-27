@@ -1,4 +1,4 @@
-import { Link, useParams } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { ArrowRight, ArrowUpRight, CheckCircle } from 'lucide-react';
@@ -183,7 +183,7 @@ function ServiceHero() {
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
   return (
-    <section ref={ref} className="relative h-[55vh] sm:h-[65vh] lg:h-[75vh] min-h-[350px] sm:min-h-125 overflow-hidden">
+    <section ref={ref} className="relative h-[55vh] sm:h-[65vh] lg:h-[75vh] min-h-87.5 sm:min-h-125 overflow-hidden">
       <motion.div style={{ y: heroY }} className="absolute inset-0">
         <img
           src="https://images.unsplash.com/photo-1600573472592-401b489a3cdc?w=1920&q=80"

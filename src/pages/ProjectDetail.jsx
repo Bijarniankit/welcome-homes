@@ -1,6 +1,6 @@
 import { useParams, Link, Navigate } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'motion/react';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { ArrowLeft, ArrowRight, ArrowUpRight, MapPin, Calendar, Maximize2, BedDouble, Bath, X } from 'lucide-react';
 import { RevealOnScroll, SectionLabel, TextReveal, AnimatedLine } from '../components/AnimatedElements';
 import { projects } from '../data/siteData';
@@ -19,6 +19,13 @@ export default function ProjectDetail() {
   const heroY = useTransform(scrollYProgress, [0, 1], [0, 150]);
   const heroOpacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
+  useEffect(() => {
+    document.body.style.overflow = lightboxOpen ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [lightboxOpen]);
+
   if (!project) return <Navigate to="/projects" replace />;
 
   const currentIndex = projects.findIndex(p => p.id === id);
@@ -28,30 +35,28 @@ export default function ProjectDetail() {
   const openLightbox = (idx) => {
     setLightboxIndex(idx);
     setLightboxOpen(true);
-    document.body.style.overflow = 'hidden';
   };
 
   const closeLightbox = () => {
     setLightboxOpen(false);
-    document.body.style.overflow = '';
   };
 
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[55vh] sm:h-[70vh] lg:h-[80vh] min-h-[350px] sm:min-h-[550px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[75vh] sm:h-[80vh] min-h-137.5 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src={project.hero}
             alt={project.name}
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/40 via-black/20 to-black/60" />
         </motion.div>
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-[1400px] mx-auto"
+          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-350 mx-auto"
         >
           <Link
             to="/projects"
@@ -81,6 +86,14 @@ export default function ProjectDetail() {
               {project.location}
             </span>
             <span className="flex items-center gap-1.5">
+              <Calendar size={14} />
+              {project.year}
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Maximize2 size={14} />
+              {project.sqm}m&sup2;
+            </span>
+            <span className="flex items-center gap-1.5">
               <BedDouble size={14} />
               {project.beds} Bedrooms
             </span>
@@ -88,17 +101,13 @@ export default function ProjectDetail() {
               <Bath size={14} />
               {project.baths} Bathrooms
             </span>
-            <span className="flex items-center gap-1.5">
-              <Calendar size={14} />
-              {project.year}
-            </span>
           </motion.div>
         </motion.div>
       </section>
 
       {/* ===== PROJECT DETAILS ===== */}
       <section className="section-padding bg-white">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid lg:grid-cols-3 gap-12 lg:gap-20">
             {/* Story */}
             <div className="lg:col-span-2">
@@ -126,7 +135,7 @@ export default function ProjectDetail() {
                         src={img}
                         alt={`${project.name} - Image ${i + 1}`}
                         loading="lazy"
-                        className={`w-full object-cover ${i === 0 ? 'aspect-[16/9]' : 'aspect-[4/3]'}`}
+                        className={`w-full object-cover ${i === 0 ? 'aspect-video' : 'aspect-4/3'}`}
                         whileHover={{ scale: 1.03 }}
                         transition={{ duration: 0.5 }}
                       />
@@ -149,6 +158,7 @@ export default function ProjectDetail() {
                       { label: "Location", value: project.location },
                       { label: "Build Type", value: project.type },
                       { label: "Year Completed", value: project.year },
+                      { label: "Size", value: `${project.sqm}m²` },
                       { label: "Bedrooms", value: project.beds },
                       { label: "Bathrooms", value: project.baths },
                     ].map((item, i) => (
@@ -187,7 +197,7 @@ export default function ProjectDetail() {
 
       {/* ===== NEXT/PREV PROJECTS ===== */}
       <section className="bg-warm-50 py-12 sm:py-16 border-t border-charcoal-100">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           <div className="grid sm:grid-cols-2 gap-6">
             <Link to={`/projects/${prevProject.id}`} className="group flex items-center gap-4">
               <ArrowLeft size={20} className="text-charcoal-300 group-hover:text-charcoal-600 group-hover:-translate-x-1 transition-all" />
@@ -217,7 +227,7 @@ export default function ProjectDetail() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          className="fixed inset-0 z-[9999] bg-black/95 flex items-center justify-center p-4"
+          className="fixed inset-0 z-9999 bg-black/95 flex items-center justify-center p-4"
           onClick={closeLightbox}
         >
           <button
@@ -230,7 +240,7 @@ export default function ProjectDetail() {
           <div className="flex items-center gap-4 w-full max-w-5xl" onClick={e => e.stopPropagation()}>
             <button
               onClick={() => setLightboxIndex((lightboxIndex - 1 + project.images.length) % project.images.length)}
-              className="text-white/40 hover:text-white transition-colors flex-shrink-0"
+              className="text-white/40 hover:text-white transition-colors shrink-0"
             >
               <ArrowLeft size={24} />
             </button>
@@ -247,7 +257,7 @@ export default function ProjectDetail() {
 
             <button
               onClick={() => setLightboxIndex((lightboxIndex + 1) % project.images.length)}
-              className="text-white/40 hover:text-white transition-colors flex-shrink-0"
+              className="text-white/40 hover:text-white transition-colors shrink-0"
             >
               <ArrowRight size={24} />
             </button>

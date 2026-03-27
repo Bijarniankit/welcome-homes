@@ -17,19 +17,19 @@ export default function Projects() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[55vh] sm:h-[65vh] lg:h-[75vh] min-h-[350px] sm:min-h-[500px] overflow-hidden">
+      <section ref={heroRef} className="relative h-[55vh] sm:h-[65vh] lg:h-[75vh] min-h-87.5 sm:min-h-125 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=1920&q=80"
             alt="Our Projects"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/30 to-black/60" />
+          <div className="absolute inset-0 bg-linear-to-b from-black/50 via-black/30 to-black/60" />
         </motion.div>
 
         <motion.div
           style={{ opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-[1400px] mx-auto"
+          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-350 mx-auto"
         >
           <motion.p
             initial={{ opacity: 0, y: 20 }}
@@ -53,7 +53,7 @@ export default function Projects() {
 
       {/* ===== PROJECTS GRID ===== */}
       <section className="section-padding bg-warm-50">
-        <div className="max-w-[1400px] mx-auto px-5 sm:px-8 lg:px-12">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
           {/* Section title */}
           <RevealOnScroll>
             <div className="mb-10 sm:mb-14">
@@ -81,7 +81,7 @@ export default function Projects() {
                       src={project.hero}
                       alt={project.name}
                       loading="lazy"
-                      className="w-full aspect-[4/3] object-cover"
+                      className="w-full aspect-4/3 object-cover"
                       whileHover={{ scale: 1.05 }}
                       transition={{ duration: 0.6, ease: "easeOut" }}
                     />
@@ -102,7 +102,7 @@ export default function Projects() {
                         <span>{project.baths} Bath</span>
                       </div>
                     </div>
-                    <span className="w-8 h-8 rounded-full border border-charcoal-200 flex items-center justify-center mt-1 group-hover:bg-charcoal-900 group-hover:border-charcoal-900 group-hover:text-white transition-all flex-shrink-0">
+                    <span className="w-8 h-8 rounded-full border border-charcoal-200 flex items-center justify-center mt-1 group-hover:bg-charcoal-900 group-hover:border-charcoal-900 group-hover:text-white transition-all shrink-0">
                       <ArrowUpRight size={14} />
                     </span>
                   </div>

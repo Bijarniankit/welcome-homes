@@ -16,7 +16,7 @@ export default function Testimonials() {
   return (
     <>
       {/* ===== HERO ===== */}
-      <section ref={heroRef} className="relative h-[55vh] sm:h-[65vh] lg:h-[70vh] min-h-[350px] sm:min-h-112.5 overflow-hidden">
+      <section ref={heroRef} className="relative h-[55vh] sm:h-[65vh] lg:h-[70vh] min-h-87.5 sm:min-h-112.5 overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <img
             src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?w=1920&q=80"
