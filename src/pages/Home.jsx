@@ -36,14 +36,14 @@ export default function Home() {
         {/* Hero Content */}
         <motion.div
           style={{ y: heroY, opacity: heroOpacity }}
-          className="relative z-10 h-full flex flex-col justify-end pb-16 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-350 mx-auto"
+          className="relative z-10 h-full flex flex-col justify-end pb-28 sm:pb-20 lg:pb-28 px-5 sm:px-8 lg:px-12 max-w-350 mx-auto"
         >
           <div className="max-w-3xl">
             <motion.p
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3, duration: 0.8 }}
-              className="text-white/60 text-xs sm:text-sm tracking-[0.25em] uppercase mb-4 sm:mb-6"
+              className="text-white/60 text-sm tracking-[0.25em] uppercase mb-4 sm:mb-6"
             >
               Custom Home Builders &middot; Perth, WA
             </motion.p>
@@ -52,7 +52,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 40 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.5, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-              className="hero-heading text-4xl sm:text-5xl lg:text-6xl xl:text-7xl text-white leading-[1.1] mb-6 sm:mb-8"
+              className="hero-heading text-[2.6rem] sm:text-4xl lg:text-5xl xl:text-6xl text-white leading-[1.1] mb-6 sm:mb-8"
             >
               Home that<br />
               <span className="italic">welcomes</span> you<br />

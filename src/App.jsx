@@ -47,6 +47,7 @@ function PageWrapper({ children }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.4, ease: 'easeInOut' }}
+      className="relative"
     >
       {children}
     </motion.div>
@@ -61,7 +62,7 @@ export default function App() {
   ].includes(location.pathname) && !location.pathname.startsWith('/projects/');
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col relative overflow-x-hidden">
       <ScrollToTop />
       <Navbar />
 

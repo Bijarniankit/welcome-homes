@@ -38,13 +38,13 @@ export default function Navbar() {
         }`}
       >
         <nav className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between h-16 sm:h-18 lg:h-20">
+          <div className="flex items-center justify-between h-20 sm:h-22 lg:h-22">
             {/* Logo */}
             <Link to="/" onClick={closeMenu} className="relative z-60 group">
               <img
                 src={scrolled && !isOpen ? '/logo2.png' : isOpen ? '/logo2.png' : '/logo1.png'}
                 alt="Welcome Homes WA"
-                className="h-12 sm:h-14 w-auto transition-opacity duration-300"
+                className="h-18 sm:h-21 w-auto transition-opacity duration-300"
                 style={!scrolled && !isOpen ? { filter: 'brightness(0) invert(1)' } : {}}
               />
             </Link>
@@ -137,6 +137,15 @@ export default function Navbar() {
             transition={{ duration: 0.3, ease: [0.16, 1, 0.3, 1] }}
             className="fixed inset-0 z-50 lg:hidden bg-white"
           >
+            {/* Close button */}
+            <button
+              onClick={closeMenu}
+              className="absolute top-5 right-5 w-10 h-10 flex items-center justify-center rounded-full bg-charcoal-100 text-charcoal-700 hover:bg-charcoal-200 transition-colors"
+              aria-label="Close menu"
+            >
+              <X size={20} strokeWidth={2} />
+            </button>
+
             {/* Content */}
             <div className="flex flex-col justify-center h-full px-8 sm:px-12">
               {/* Navigation links */}

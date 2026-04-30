@@ -83,6 +83,7 @@
    GLOBAL STYLES
    ============================================ */
 html {
+  position: relative;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -95,7 +96,6 @@ body {
   background-color: var(--color-warm-50);
   line-height: 1.7;
   letter-spacing: -0.01em;
-  overflow-x: hidden;
   overscroll-behavior: none;
 }
 
