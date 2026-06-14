@@ -6,8 +6,7 @@ import Footer, { CTASection } from './components/Footer';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import Projects from './pages/Projects';
-import ProjectDetail from './pages/ProjectDetail';
+import Gallery from './pages/Gallery';
 import Testimonials from './pages/Testimonials';
 import Contact from './pages/Contact';
 import NotFound from './pages/NotFound';
@@ -58,8 +57,8 @@ export default function App() {
   const location = useLocation();
   const isContactPage = location.pathname === '/contact';
   const isNotFound = ![
-    '/', '/about', '/services', '/projects', '/testimonials', '/contact'
-  ].includes(location.pathname) && !location.pathname.startsWith('/projects/');
+    '/', '/about', '/services', '/gallery', '/testimonials', '/contact'
+  ].includes(location.pathname);
 
   return (
     <div className="min-h-screen flex flex-col relative overflow-x-hidden">
@@ -72,8 +71,7 @@ export default function App() {
             <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
             <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
             <Route path="/services" element={<PageWrapper><Services /></PageWrapper>} />
-            <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
-            <Route path="/projects/:id" element={<PageWrapper><ProjectDetail /></PageWrapper>} />
+            <Route path="/gallery" element={<PageWrapper><Gallery /></PageWrapper>} />
             <Route path="/testimonials" element={<PageWrapper><Testimonials /></PageWrapper>} />
             <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
             <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />

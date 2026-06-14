@@ -35,7 +35,7 @@ export function CTASection() {
                 <ArrowUpRight size={16} className="group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
               </Link>
               <Link
-                to="/projects"
+                to="/gallery"
                 className="inline-flex items-center gap-3 border border-white/20 text-white px-8 py-4 rounded-full text-sm tracking-wide hover:bg-white/10 transition-colors"
               >
                 View Our Work

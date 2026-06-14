@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform } from 'motion/react';
 import { useRef } from 'react';
 import { ArrowUpRight, ArrowRight, Palette, Hammer, Eye, CheckCircle, Star, ChevronRight } from 'lucide-react';
 import { RevealOnScroll, StaggerContainer, StaggerItem, SectionLabel, TextReveal, ImageReveal, AnimatedLine } from '../components/AnimatedElements';
-import { stats, whyChooseUs, projects, testimonials } from '../data/siteData';
+import { stats, whyChooseUs, testimonials } from '../data/siteData';
 
 const iconMap = { Palette, Hammer, Eye, CheckCircle };
 
@@ -66,7 +66,7 @@ export default function Home() {
               className="flex flex-row flex-wrap gap-3 sm:gap-4"
             >
               <Link
-                to="/projects"
+                to="/gallery"
                 className="inline-flex items-center justify-center gap-2 bg-white text-charcoal-900 px-5 sm:px-8 py-3 sm:py-3.5 rounded-full text-sm tracking-wide hover:bg-warm-100 transition-colors group"
               >
                 View Our Work
@@ -100,6 +100,40 @@ export default function Home() {
             />
           </motion.div>
         </motion.div>
+      </section>
+
+      {/* ===== VIDEO SECTION ===== */}
+      <section className="section-slide section-padding bg-warm-50">
+        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
+          <div className="text-center max-w-2xl mx-auto mb-10 sm:mb-14">
+            <SectionLabel>Watch Our Story</SectionLabel>
+            <TextReveal
+              text="See our craft in action"
+              className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900"
+              tag="h2"
+            />
+          </div>
+
+          <RevealOnScroll>
+            <div className="relative aspect-video rounded-2xl overflow-hidden bg-charcoal-100 max-w-4xl mx-auto">
+              <iframe
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?rel=0&modestbranding=1"
+                title="Welcome Homes WA"
+                className="absolute inset-0 w-full h-full"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                loading="lazy"
+                allowFullScreen
+              />
+            </div>
+          </RevealOnScroll>
+
+          <RevealOnScroll delay={0.2}>
+            <p className="text-center text-sm text-charcoal-400 mt-6 max-w-lg mx-auto">
+              Take a look at how we bring our clients' visions to life — from initial concept
+              through to the final handover.
+            </p>
+          </RevealOnScroll>
+        </div>
       </section>
 
       {/* ===== STATS STRIP ===== */}
@@ -204,63 +238,6 @@ export default function Home() {
               );
             })}
           </StaggerContainer>
-        </div>
-      </section>
-
-      {/* ===== FEATURED PROJECTS ===== */}
-      <section className="section-slide section-padding bg-warm-50">
-        <div className="max-w-350 mx-auto px-5 sm:px-8 lg:px-12">
-          <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12 sm:mb-16">
-            <div>
-              <SectionLabel>Featured Projects</SectionLabel>
-              <TextReveal
-                text="Recent builds"
-                className="text-3xl sm:text-4xl lg:text-5xl font-light tracking-tight text-charcoal-900"
-                tag="h2"
-              />
-            </div>
-            <RevealOnScroll>
-              <Link
-                to="/projects"
-                className="inline-flex items-center gap-2 text-sm text-charcoal-500 hover:text-charcoal-900 transition-colors group"
-              >
-                View all projects
-                <ArrowRight size={16} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </RevealOnScroll>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
-            {projects.slice(0, 3).map((project, i) => (
-              <RevealOnScroll key={project.id} delay={i * 0.15}>
-                <Link to={`/projects/${project.id}`} className="group block">
-                  <div className="overflow-hidden rounded-2xl mb-4">
-                    <motion.img
-                      src={project.hero}
-                      alt={project.name}
-                      loading="lazy"
-                      className="w-full aspect-4/3 object-cover"
-                      whileHover={{ scale: 1.05 }}
-                      transition={{ duration: 0.6, ease: "easeOut" }}
-                    />
-                  </div>
-                  <div className="flex items-start justify-between">
-                    <div>
-                      <h3 className="text-lg font-normal text-charcoal-900 tracking-tight group-hover:text-warm-600 transition-colors">
-                        {project.name}
-                      </h3>
-                      <p className="text-sm text-charcoal-400 mt-1">
-                        {project.location}
-                      </p>
-                    </div>
-                    <span className="w-8 h-8 rounded-full border border-charcoal-200 flex items-center justify-center mt-1 group-hover:bg-charcoal-900 group-hover:border-charcoal-900 group-hover:text-white transition-all">
-                      <ArrowUpRight size={14} />
-                    </span>
-                  </div>
-                </Link>
-              </RevealOnScroll>
-            ))}
-          </div>
         </div>
       </section>
 
