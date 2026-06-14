@@ -14,20 +14,22 @@ const fullSrc = (id) => `/gallery/${id}.webp`;
 const BATCH = 20;
 
 /*
- * Alternating row pattern + gutter by breakpoint. Rows cycle through the counts
- * (e.g. 4 then 3). Every card is the SAME width (1 / maxCols of the row), so a
- * 3-row is narrower than a 4-row and gets centered — the leftover space splits to
- * the sides and the offset gives the brick-wall look.
+ * Layout by breakpoint:
+ *  - Tablet & desktop ("brick"): rows cycle through counts (e.g. 4 then 3) and each
+ *    row fills the full width, so a 3-row's tiles are wider than a 4-row's — the seam
+ *    mismatch gives the brick-wall offset. The final leftover row keeps the base
+ *    (1 / maxCols) tile size instead of stretching.
+ *  - Mobile ("grid"): a clean uniform 2-column grid.
  */
 function getLayout(w) {
-  if (w >= 1024) return { pattern: [4, 3], gap: 16 };
-  if (w >= 768) return { pattern: [3, 2], gap: 16 };
-  return { pattern: [2, 1], gap: 12 };
+  if (w >= 1024) return { mode: 'brick', pattern: [4, 3], gap: 16 };
+  if (w >= 768) return { mode: 'brick', pattern: [3, 2], gap: 16 };
+  return { mode: 'grid', cols: 2, gap: 12 };
 }
 
 function useLayout() {
   const [layout, setLayout] = useState(() =>
-    typeof window === 'undefined' ? { pattern: [4, 3], gap: 16 } : getLayout(window.innerWidth)
+    typeof window === 'undefined' ? { mode: 'brick', pattern: [4, 3], gap: 16 } : getLayout(window.innerWidth)
   );
   useEffect(() => {
     const onResize = () => setLayout(getLayout(window.innerWidth));
@@ -62,9 +64,9 @@ export default function Gallery() {
   const isOpen = lightboxIndex !== null;
 
   const layout = useLayout();
-  const maxCols = layout.pattern[0];
+  const isGrid = layout.mode === 'grid';
   const visibleImages = galleryImages.slice(0, visibleCount);
-  const rows = buildRows(visibleImages, layout.pattern);
+  const rows = isGrid ? [] : buildRows(visibleImages, layout.pattern);
   const hasMore = visibleCount < galleryImages.length;
 
   const sentinelRef = useRef(null);
@@ -119,8 +121,33 @@ export default function Gallery() {
     return () => window.removeEventListener('keydown', onKey);
   }, [isOpen]);
 
-  // Equal width for every card: 1 / maxCols of the row, minus its share of the gaps.
-  const cardWidth = `calc((100% - ${(maxCols - 1) * layout.gap}px) / ${maxCols})`;
+  // Base tile width (brick mode) — used to keep the final partial row tidy.
+  const maxCols = isGrid ? layout.cols : layout.pattern[0];
+  const baseWidth = `calc((100% - ${(maxCols - 1) * layout.gap}px) / ${maxCols})`;
+
+  // Skeleton + image, shared by both layouts (wrapper supplies size/shape).
+  const renderTile = (id, index) => {
+    const isLoaded = loaded[id];
+    return (
+      <>
+        <div
+          className={`absolute inset-0 bg-warm-100 animate-pulse transition-opacity duration-500 ${
+            isLoaded ? 'opacity-0' : 'opacity-100'
+          }`}
+        />
+        <img
+          src={thumbSrc(id)}
+          alt={`Welcome Homes WA gallery ${index + 1}`}
+          loading="lazy"
+          decoding="async"
+          onLoad={() => markLoaded(id)}
+          className={`relative w-full h-full object-cover transition duration-500 group-hover:scale-105 ${
+            isLoaded ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
+      </>
+    );
+  };
 
   return (
     <>
@@ -174,45 +201,43 @@ export default function Gallery() {
             </div>
           </RevealOnScroll>
 
-          {/* Uniform-width cards, alternating 4 / 3 per row, centered (brick offset) */}
-          <div className="space-y-3 sm:space-y-4">
-            {rows.map((row, ri) => (
-              <div
-                key={ri}
-                className="flex justify-center"
-                style={{ gap: `${layout.gap}px` }}
-              >
-                {row.map((brick) => {
-                  const isLoaded = loaded[brick.id];
-                  return (
-                    <div
-                      key={brick.id}
-                      onClick={() => openLightbox(brick.index)}
-                      style={{ width: cardWidth }}
-                      className="group relative h-36 sm:h-48 lg:h-56 overflow-hidden rounded-xl cursor-pointer bg-warm-100 shadow-sm hover:shadow-md transition-shadow duration-300"
-                    >
-                      {/* Skeleton */}
+          {isGrid ? (
+            /* Mobile — clean uniform 2-column grid */
+            <div className="grid grid-cols-2 gap-3">
+              {visibleImages.map((id, i) => (
+                <div
+                  key={id}
+                  onClick={() => openLightbox(i)}
+                  className="group relative aspect-4/3 overflow-hidden rounded-xl cursor-pointer bg-warm-100 shadow-sm"
+                >
+                  {renderTile(id, i)}
+                </div>
+              ))}
+            </div>
+          ) : (
+            /* Tablet & desktop — full-width brick rows (alternating 4 / 3) */
+            <div className="space-y-3 sm:space-y-4">
+              {rows.map((row, ri) => {
+                const intended = layout.pattern[ri % layout.pattern.length];
+                // Once everything is loaded, don't stretch a leftover final row.
+                const isPartial = !hasMore && ri === rows.length - 1 && row.length < intended;
+                return (
+                  <div key={ri} className="flex" style={{ gap: `${layout.gap}px` }}>
+                    {row.map((brick) => (
                       <div
-                        className={`absolute inset-0 bg-warm-100 animate-pulse transition-opacity duration-500 ${
-                          isLoaded ? 'opacity-0' : 'opacity-100'
-                        }`}
-                      />
-                      <img
-                        src={thumbSrc(brick.id)}
-                        alt={`Welcome Homes WA gallery ${brick.index + 1}`}
-                        loading="lazy"
-                        decoding="async"
-                        onLoad={() => markLoaded(brick.id)}
-                        className={`relative w-full h-full object-cover transition duration-500 group-hover:scale-105 ${
-                          isLoaded ? 'opacity-100' : 'opacity-0'
-                        }`}
-                      />
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
+                        key={brick.id}
+                        onClick={() => openLightbox(brick.index)}
+                        style={isPartial ? { width: baseWidth } : undefined}
+                        className={`group relative ${isPartial ? 'flex-none' : 'flex-1'} min-w-0 h-36 sm:h-48 lg:h-56 overflow-hidden rounded-xl cursor-pointer bg-warm-100 shadow-sm hover:shadow-md transition-shadow duration-300`}
+                      >
+                        {renderTile(brick.id, brick.index)}
+                      </div>
+                    ))}
+                  </div>
+                );
+              })}
+            </div>
+          )}
 
           {/* Infinite-scroll sentinel + loading hint */}
           {hasMore && (
@@ -236,41 +261,40 @@ export default function Gallery() {
         >
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white/60 hover:text-white transition-colors z-10"
+            className="absolute top-5 right-5 z-10 p-2 rounded-full bg-black/30 text-white/70 hover:text-white hover:bg-black/50 transition-colors"
             aria-label="Close"
           >
-            <X size={24} />
+            <X size={22} />
           </button>
 
-          <div className="flex items-center gap-4 w-full max-w-5xl" onClick={(e) => e.stopPropagation()}>
-            <button
-              onClick={showPrev}
-              className="text-white/40 hover:text-white transition-colors shrink-0"
-              aria-label="Previous image"
-            >
-              <ArrowLeft size={24} />
-            </button>
+          <button
+            onClick={(e) => { e.stopPropagation(); showPrev(); }}
+            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white/70 hover:text-white hover:bg-black/50 transition-colors"
+            aria-label="Previous image"
+          >
+            <ArrowLeft size={22} />
+          </button>
 
-            <motion.img
-              key={lightboxIndex}
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3 }}
-              src={fullSrc(galleryImages[lightboxIndex])}
-              alt={`Welcome Homes WA gallery ${lightboxIndex + 1}`}
-              className="w-full max-h-[85vh] object-contain rounded-lg"
-            />
+          <motion.img
+            key={lightboxIndex}
+            initial={{ opacity: 0, scale: 0.97 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3 }}
+            src={fullSrc(galleryImages[lightboxIndex])}
+            alt={`Welcome Homes WA gallery ${lightboxIndex + 1}`}
+            onClick={(e) => e.stopPropagation()}
+            className="max-w-full max-h-[85vh] object-contain rounded-lg select-none"
+          />
 
-            <button
-              onClick={showNext}
-              className="text-white/40 hover:text-white transition-colors shrink-0"
-              aria-label="Next image"
-            >
-              <ArrowRight size={24} />
-            </button>
-          </div>
+          <button
+            onClick={(e) => { e.stopPropagation(); showNext(); }}
+            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-10 p-2 rounded-full bg-black/30 text-white/70 hover:text-white hover:bg-black/50 transition-colors"
+            aria-label="Next image"
+          >
+            <ArrowRight size={22} />
+          </button>
 
-          <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-white/50 text-sm tracking-wide">
+          <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-white/60 text-sm tracking-wide">
             {lightboxIndex + 1} / {galleryImages.length}
           </div>
         </motion.div>
