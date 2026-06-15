@@ -410,11 +410,11 @@ async function handleEmailRequest(req, res) {
                                 <tr>
                                   <td style="padding-right: 25px;">
                                     <p style="margin: 0 0 3px 0; font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px;">Phone</p>
-                                    <a href="tel:+61890000000" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500;">+61 8 9000 0000</a>
+                                    <a href="tel:+61426820063" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500;">0426 820 063</a>
                                   </td>
                                   <td>
                                     <p style="margin: 0 0 3px 0; font-size: 11px; color: rgba(255,255,255,0.5); text-transform: uppercase; letter-spacing: 0.5px;">Email</p>
-                                    <a href="mailto:info@welcomehomeswa.com.au" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500;">info@welcomehomeswa.com.au</a>
+                                    <a href="mailto:hello@welcomehomeswa.com.au" style="color: #ffffff; text-decoration: none; font-size: 16px; font-weight: 500;">hello@welcomehomeswa.com.au</a>
                                   </td>
                                 </tr>
                               </table>

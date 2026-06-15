@@ -3,8 +3,8 @@
 export const siteConfig = {
   name: "Welcome Homes WA",
   tagline: "Home that welcomes you everytime",
-  phone: "+61 8 9000 0000",
-  email: "info@welcomehomeswa.com.au",
+  phone: "0426 820 063",
+  email: "hello@welcomehomeswa.com.au",
   address: "Perth, Western Australia",
   abn: "00 000 000 000",
   social: {
